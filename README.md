@@ -1,20 +1,13 @@
 # Zabbix-in-Telegram
 Zabbix Notifications with graphs in Telegram
 
-Join us in our **Telegram group** via this link: https://t.me/ZbxTg
-
-Subscribe to our channel: https://t.me/Zabbix_in_Telegram
-
-Rate on [share.zabbix.com](https://share.zabbix.com): https://share.zabbix.com/cat-notifications/zabbix-in-telegram
-
-### Features
-- [x] Graphs based on latest data are sent directly to your messenger
-- [x] You can send messages both in private and group/supergroup chats
-- [x] Channels support (only public, but you can do it for private as well with dirty hack)
-- [x] Saves chatid as a temporary file
-- [x] Simple markdown and HTML are supported
-- [x] Emoji (you can use emoji instead of severity, see [the wiki article](https://github.com/ableev/Zabbix-in-Telegram/wiki/Trigger-severity-as-Emoji)) (zabbix doesn't support utf8mb4 encoding yet)
-- [x] Location map
+### Đặc trưng
+- [x] Đồ thị dựa trên dữ liệu mới nhất được gửi trực tiếp đến trình nhắn tin của bạn
+- [x] Bạn có thể gửi tin nhắn cả trong cuộc trò chuyện riêng tư và group/supergroup
+- [x] Lưu chatid dưới dạng tệp tạm thời
+- [x] Simple markdown and HTML được hỗ trợ
+- [x] Emoji - Biểu tượng cảm xúc (you can use emoji instead of severity, see [the wiki article](https://github.com/ableev/Zabbix-in-Telegram/wiki/Trigger-severity-as-Emoji)) (abbix chưa hỗ trợ mã hóa utf8mb4)
+- [x] Bản đồ địa điểm
 
 ### TODOs
 - Simple zabbix's management via bot's commands – in dev state
