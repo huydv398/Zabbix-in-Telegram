@@ -9,51 +9,55 @@ Zabbix Notifications with graphs in Telegram
 - [x] Emoji - Biểu tượng cảm xúc (you can use emoji instead of severity, see [the wiki article](https://github.com/ableev/Zabbix-in-Telegram/wiki/Trigger-severity-as-Emoji)) (abbix chưa hỗ trợ mã hóa utf8mb4)
 - [x] Bản đồ địa điểm
 
-### TODOs
-- Simple zabbix's management via bot's commands – in dev state
-- Ability to send complex graph or part of screen
+### TODOs - VIỆC CẦN LÀM
+- Quản lý zabbix đơn giản thông qua lệnh của bot - ở trạng thái dev
+- Khả năng gửi đồ thị phức tạp hoặc một phần của màn hìnhn
 
 
-### Configuration / Installation
+### Cấu hình / Cài đặt
 
-**READ WIKI IF YOU HAVE PROBLEM WITH SOMETHING**: https://github.com/ableev/Zabbix-in-Telegram/wiki
+**ĐỌC WIKI NẾU BẠN CÓ VẤN ĐỀ VỚI LỖI**: https://github.com/ableev/Zabbix-in-Telegram/wiki
 
-**First of all**: You need to install the appropriate modules for python, this is required for operation! </br>
-                  To do so, enter `pip install -r requirements.txt` in your commandline!
+**Trước hết**: Bạn cần cài đặt các mô-đun thích hợp cho python, điều này là bắt buộc để hoạt động! </br>
+                  Để làm như vậy, hãy nhập `pip install -r requirements.txt` dòng lệnh của bạn!
 
- * Put `zbxtg.py` in your `AlertScriptsPath` directory, the path is set inside your `zabbix_server.conf`
- * Put `zbxtg_group.py` in the same location if you want to send messages to the group chat (if you are using Zabbix 2.x version)
- * Create `zbxtg_settings.py` (copy it from `zbxtg_settings.example.py`) with your settings and save them in the same directory as the script, see example for layout
-  * Create a bot in Telegram and get API key: https://core.telegram.org/bots#creating-a-new-bot
-  * Create readonly user in Zabbix web interface (for getting graphs from zabbix)
-  * Set proxy host:port in `zbxtg_settings.py` if you need an internet proxy (socks5 supported as well, the wiki will help you)
- * Add new media for Telegram in Zabbix web interface with these settings:
- 
-<img src="https://i.imgur.com/Ytrbe4S.png" width="400px">
+ * Đặt `zbxtg.py` trong `AlertScriptsPath` thư mục `/usr/lib/zabbix/alertscripts/` , đường dẫn được đặt bên trong `zabbix_server.conf`
+    ```
+    [root@zabbix-srv ~]# cat /etc/zabbix/zabbix_server.conf | grep alertscripts
+    # AlertScriptsPath=${datadir}/zabbix/alertscripts
+    AlertScriptsPath=/usr/lib/zabbix/alertscripts
+    [root@zabbix-srv ~]#
+    ```
+ * Đặt `zbxtg_group.py` cùng thư mục `/usr/lib/zabbix/alertscripts/` được copy nội dung từ file `zbxtg.py`
+ * Tạo `zbxtg_settings.py` (copy từ file `zbxtg_settings.example.py`) Rồi thay đổi các thành phần bên trong để có thể gửi được nội dung về telegram
+  * Tạo một bot Telegram và lấy API key
+ * Tạo mới media type for Telegram in Zabbix web interface  settings:
+  <img src="https://i.imgur.com/lHb3MlO.png" width="400px">
+  <img src="https://i.imgur.com/8z5p4hH.png" width="400px">
 
- * Add another one if you want to send messages to the group
- 
-<img src="http://i.imgur.com/OTq4aQd.png" width="400px">
+ * Hoặc nếu muốn gửi vào nhóm telegram
+ <img src="https://i.imgur.com/Hx92QdF.png" width="400px">
 
- * **Note that Zabbix 3.0 has different settings for that step, see it there**: https://github.com/ableev/Zabbix-in-Telegram/wiki/Working-with-Zabbix-3.0
- * Send a message to your bot via Telegram, e.g. "/start"
-  * If you are in a group chat, start a conversation with your bot: `/start@ZbxTgDevBot`
- * Create a new action like this:
-```
-Last value: {ITEM.LASTVALUE1} ({TIME})
-zbxtg;graphs
-zbxtg;graphs_period=10800
-zbxtg;itemid:{ITEM.ID1}
-zbxtg;title:{HOST.HOST} - {TRIGGER.NAME}
-```
+ * Create a new actions like this:
+ <img src="https://i.imgur.com/JTPppu7.png" width="400px">
+    ```
+    Last value: {ITEM.LASTVALUE1} ({TIME})
+    zbxtg;graphs
+    zbxtg;graphs_period=10800
+    zbxtg;itemid:{ITEM.ID1}
+    zbxtg;title:{HOST.HOST} - {TRIGGER.NAME}
+    ``` 
 
-<img src="https://i.imgur.com/ZNKtBUX.png" width="400px">
+<img src="https://i.imgur.com/lg4gooJ.png" width="400px">
+<img src="https://i.imgur.com/tDgMJ7z.png" width="400px">
+<img src="https://i.imgur.com/t0o8ETH.png" width="400px">
+<img src="https://i.imgur.com/I9KonhG.png" width="400px">
+<img src="https://i.imgur.com/TKgcBk5.png" width="400px">
 
- * Add the appropriate Media Type to your user
-  * The username is **CASE-SENSITIVE**
-  * If you don't have a username, you can use your chatid directly (and you need to google how to get it)
-  * Group chats don't have URLs, so you need to put group's name in media type
-  * Messages for channels should be sent as for private chats (simply add bot to your channel first and use channel's username as if it was a real user)
+* add media type
+<img src="https://i.imgur.com/Hx92QdF.png" width="400px">
+
+
 
   * Private:
 
@@ -82,16 +86,14 @@ You can use markdown or html formatting in your action: https://core.telegram.or
 
 #### Debug
 
-* You can use the following command to send a message from your command line: </br>
+* Câu lệnh test: </br>
 `./zbxtg.py "@username" "first part of a message" "second part of a message" --debug`
- * For `@username` substitute your Telegram username, **NOT that of your bot** (case-sensitive) OR chatid
+ * For `@username` substitute your Telegram username, chat-id
  * For `first part of a message` and `second part of a message` just substitute something like "test" "test" (for Telegram it's doesn't matter between subject and body)
  * You can skip the `"` if it's one word for every parameter, these are optional
 
 ---
 
-![](http://i.imgur.com/1T4aHuf.png)
-![](http://i.imgur.com/5ZPyvoe.png)
 
 ### Known issues
 
