@@ -36,10 +36,15 @@ Zabbix Notifications with graphs in Telegram
   <img src="https://i.imgur.com/8z5p4hH.png" width="400px">
 
  * Hoặc nếu muốn gửi vào nhóm telegram
- <img src="https://i.imgur.com/Hx92QdF.png" width="400px">
+   * {ALERT.SENDTO}
+   * {ALERT.SUBJECT}
+   * {ALERT.MESSAGE}
+
+   <img src="https://i.imgur.com/Hx92QdF.png" width="400px">
 
  * Create a new actions like this:
- <img src="https://i.imgur.com/JTPppu7.png" width="400px">
+   
+   <img src="https://i.imgur.com/JTPppu7.png" width="400px">
     ```
     Last value: {ITEM.LASTVALUE1} ({TIME})
     zbxtg;graphs
@@ -89,17 +94,8 @@ You can use markdown or html formatting in your action: https://core.telegram.or
 * Câu lệnh test: </br>
 `./zbxtg.py "@username" "first part of a message" "second part of a message" --debug`
  * For `@username` substitute your Telegram username, chat-id
- * For `first part of a message` and `second part of a message` just substitute something like "test" "test" (for Telegram it's doesn't matter between subject and body)
- * You can skip the `"` if it's one word for every parameter, these are optional
-
+ * For `first part of a message` and `second part of a message` là nội dung để gửi đến telegram khi thực hiện test
 ---
-
-
-### Known issues
-
-#### MEDIA_CAPTION_TOO_LONG
-If you see this error, it means that you rich the limit of caption with 200 symbols in it (Telegram API's limitaion).
-Such captions will be automatically cut to 200 symbols.
 
 #### Zabbix 3.0 and higher (3.2, 3.4, 4.0, 4.2, 4.4)
 https://github.com/ableev/Zabbix-in-Telegram/wiki/Working-with-Zabbix-3.0
