@@ -240,5 +240,21 @@ Thực hiện test tại **Media type** - **canhbao-tele** -> **test**, điền 
  * `@username` telegram hỗ trợ `@username` tương đương với ID
  * For `first part of a message` and `second part of a message` là nội dung để gửi đến telegram khi thực hiện test
 
+## Gửi thông báo về group telegram.
+![Imgur](https://i.imgur.com/gx89xNn.png)
 
----
+username: `@huydv_bot`
+api Token: `1330822781:AAHN9wcBYMzZyl8vZa5mjuQnLEsiFjvxOns`
+
+* Thêm bot vào Group.</br>![Imgur](https://i.imgur.com/8iNbUjy.png)
+* Lấy ID group: Truy cập đường dẫn kèm api token [link](https://api.telegram.org/(bot1330822781:AAHN9wcBYMzZyl8vZa5mjuQnLEsiFjvxOns/getUpdates))</br>![Imgur](https://i.imgur.com/LhrFhuk.png)</br>id: `-670816547`
+* Sửa file: `vi /var/tmp/zbxtg/uids.txt`
+  * Thêm nội dung sau vào file: `username;private;id` ở đây thực tứ là: `huydv_bot;private;-670816547`
+  * Thực hiện Test lệnh: `[root@zabbix-srv alertscripts]# ./zbxtg.py "@huydv_bot" "*first part of a message*" "__second part of a message__" --markdown --debug`
+    ```
+    [root@zabbix-srv alertscripts]# ./zbxtg.py "@huydv_bot" "*first part of a message*" "__second part of a message__" --markdown
+    [root@zabbix-srv alertscripts]#
+    ```
+* Test trên web: </br>![Imgur](https://i.imgur.com/heUp6xQ.png)
+
+* Test gửi đến username: `@huydv_bot`</br> ![Imgur](https://i.imgur.com/AFA1WrB.png)
