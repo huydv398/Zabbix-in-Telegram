@@ -11,7 +11,7 @@ Zabbix Notifications with graphs in Telegram
 
 ### TODOs - VIỆC CẦN LÀM
 - Quản lý zabbix đơn giản thông qua lệnh của bot - ở trạng thái dev
-- Khả năng gửi đồ thị phức tạp hoặc một phần của màn hìnhn
+- Khả năng gửi đồ thị phức tạp hoặc một phần của màn hình
 
 
 ### Cấu hình / Cài đặt
@@ -87,7 +87,7 @@ Successfully installed PySocks-1.6.8 certifi-2021.10.8 chardet-3.0.4 idna-2.7 oa
 
  * Tạo `zbxtg_settings.py` (copy từ file `zbxtg_settings.example.py`)
  ```
- [root@zabbix-srv alertscripts]# mv zbxtg_settings.example.py zbxtg_settings.py
+ [root@zabbix-srv alertscripts]# cp zbxtg_settings.example.py zbxtg_settings.py
  ```
   * Thêm quyền thực thi cho file:
   ```
@@ -154,24 +154,14 @@ Successfully installed PySocks-1.6.8 certifi-2021.10.8 chardet-3.0.4 idna-2.7 oa
   * ![Imgur](https://i.imgur.com/Le30l7s.png)
   * ![Imgur](https://i.imgur.com/ux63XSs.png)
   * ![Imgur](https://i.imgur.com/gUQTtKj.png)
+* Kết quả:</br>![Imgur](https://i.imgur.com/qfEQLTI.png)
 ### Tab Options
 Điền thông tin và Chọn Update</br>
 ![Imgur](https://i.imgur.com/RSQakG8.png)
-   
-
-    ```
-    Last value: {ITEM.LASTVALUE1} ({TIME})
-    zbxtg;graphs
-    zbxtg;graphs_period=10800
-    zbxtg;itemid:{ITEM.ID1}
-    zbxtg;title:{HOST.HOST} - {TRIGGER.NAME}
-    ``` 
-
-
 ## Tạo Actions
 Tạo Action: **Configuration** -> **Actions** -> **Create action**</br>![Imgur](https://i.imgur.com/gFlrciK.png)
-* Name: `canhbao-tele-action` </br>![Imgur](https://i.imgur.com/ZTiV5Wc.png)
-* Add **Operations**
+* Name: `actiontele` </br>![Imgur](https://i.imgur.com/Jpej0tp.png)
+* Add **Operations**</br>![Imgur](https://i.imgur.com/35zwhdU.png)
   * Send to users:  `Admin (Zabbix Administrator)`
   * Send only to: `canhbao-tele` (Name của media type)
   * Custom message: Check box
@@ -249,7 +239,7 @@ api Token: `1330822781:AAHN9wcBYMzZyl8vZa5mjuQnLEsiFjvxOns`
 * Thêm bot vào Group.</br>![Imgur](https://i.imgur.com/8iNbUjy.png)
 * Lấy ID group: Truy cập đường dẫn kèm api token [link](https://api.telegram.org/(bot1330822781:AAHN9wcBYMzZyl8vZa5mjuQnLEsiFjvxOns/getUpdates))</br>![Imgur](https://i.imgur.com/LhrFhuk.png)</br>id: `-670816547`
 * Sửa file: `vi /var/tmp/zbxtg/uids.txt`
-  * Thêm nội dung sau vào file: `username;private;id` ở đây thực tứ là: `huydv_bot;private;-670816547`
+  * Thêm nội dung sau vào file: `username;private;id` ở đây thực tế là: `huydv_bot;private;-670816547`
   * Thực hiện Test lệnh: `[root@zabbix-srv alertscripts]# ./zbxtg.py "@huydv_bot" "*first part of a message*" "__second part of a message__" --markdown --debug`
     ```
     [root@zabbix-srv alertscripts]# ./zbxtg.py "@huydv_bot" "*first part of a message*" "__second part of a message__" --markdown
@@ -258,3 +248,8 @@ api Token: `1330822781:AAHN9wcBYMzZyl8vZa5mjuQnLEsiFjvxOns`
 * Test trên web: </br>![Imgur](https://i.imgur.com/heUp6xQ.png)
 
 * Test gửi đến username: `@huydv_bot`</br> ![Imgur](https://i.imgur.com/AFA1WrB.png)
+
+* Thêm media: Administrator -> User -> Tab Media</br>Type: `canhbao-tele`</br>Send to: `@huydv_bot` </br>![Imgur](https://i.imgur.com/IOYUtue.png)
+
+* Khi cảnh báo sẽ được hiển thị như sau:</br>![Imgur](https://i.imgur.com/Axy7Kl4.png)
+* Khi trạng trở về mức bình thường - Recovery operations:</br>![Imgur](https://i.imgur.com/WrdkXwm.png)
