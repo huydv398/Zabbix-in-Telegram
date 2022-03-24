@@ -1,5 +1,5 @@
 # Zabbix-in-Telegram
-Zabbix Notifications with graphs in Telegram
+Gửi cảnh báo đồ thị tới Telegram
 
 ### Đặc trưng
 - [x] Đồ thị dựa trên dữ liệu mới nhất được gửi trực tiếp đến trình nhắn tin của bạn
